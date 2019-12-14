@@ -19,5 +19,5 @@ sudo mkdir efs
 sudo mount -t efs $1:/ efs
 
 pushd efs
-prove --recurse --failures ../pjdfstest/tests
+sudo prove --recurse --failures ../pjdfstest/tests | tee -a ~/pjdfstest-amazon-efs.log
 popd
