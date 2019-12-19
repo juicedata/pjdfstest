@@ -1,19 +1,11 @@
 language: c
 sudo: required
-
-matrix:
-    include:
-        - os: linux
-          compiler: clang
-          dist: xenial
-        - os: linux
-          compiler: gcc
-          dist: xenial
-        - os: osx
-          compiler: clang
-        - os: osx
-          compiler: gcc
-
 script:
-    - ./travis/build.sh
-    - ./travis/test.sh
+- travis/build.sh
+- sudo fs/juicedata-juicefs/run-test.sh
+env:
+  global:
+  - JFS_NAME=pjdfstest
+  - secure: KchSFBN8o/tnLUV//qIaC8R0PEC6Vh/weei1ceZva2aVLdGZO11qM5euzLUK5sDIwiEq9DBHI0/1qu9Z83L16IyQAqSnD/xzRV+tQo7dyVy/sbOmdtQ9Qxe5tHL1Ii6O8GHdykmYc0/IDx5exUsL9VeXdoJqmT2Ah/KUMUJDvlaS9i63fJ1734yg0qVZvA+Q5NOs1+TrbbKAIMIjqQ50Gp716ppixDDYjGqGeK7UmbVVzucKGEkEPmBNxSvVdwyM9u1Hevacas0xUa+wIKjAEn1hAZeAZXCLnfow11XjCV7t/Rjiw7JvoNoXVqforp8co6LDz5nZtAXCAJSZfYrN9BMc6X6JeQH2dBc5loEbwAXrJFbRo0pPwodaG7/bBtsUUkQVsrLNY2kyeMTZ8SvTSzHffb4xK8TnVLuq/7Co7NptscP9YsNe5JP3YtW36MR0maGfHajHqfGSUeT+oGp+U0/JJ8/tv3ZpHX/9WD4JXRUvYZnEOMKCXk9zgvG9FCk1fkk7RfLEF+4bxoehkdK1jlZicmj0/AqVY8oAABwVgFMVf8DRVq1pA00SWGrYEHCPSIb4ASWQQnDw7Qet4HK2MHxNZP84FI7nOr1LvmfJK8JIjngiOKLtVZSJhhk4y9CCNANTGcqIh56q+ZqyAW5GUrZNJG3er291wZpQ8EQm9Gc=
+  - secure: SF6uFReeR9xDx+SMgO63DkS8QnPIne2aeIen/hXCuYxqvewNfKGOyoL0nUeFWAbIItNXLRz1kciytH80+GLOITGMsQhdD8xMoM6pE5tSAZIIuw/904rfwg7xENKavP0tUDRaUsEgKicw+TS2o5tiqrqIjj9tSdSBzCMX4CyxGi9DAWtfm8LWLMFvLZ/GaXLC1ch21JGibKq9it/GyxtFseBV3Mbpx639FhivNS6q5yGuzm9g+8E+WzAcWcJmgv4qSfylv7y2YigdW9cd1IT4U7nh2aYhph7tuzcVS0VR99v5GZ5eqGoWx5HSZdJrDMf25vN66scwvt4J6eiAF1mwkblcRQYRSJfFRmK0BpmFCKhBEKq3bZ4lthRbG0kC49B1UAC24bdA+kh8dV0F/YFFFygMw02SecnopjNJ5XPoYtcvkJWPbJm4/CJ9CBXwzOffTmEXG6wucMAawN546Wl+j/IB4c4oBKJq8FhLP21SS6feoJdlwZWDsKVZXVa6dk5EUaZq2EWQI68yEVtXPFM2pfQXx042VrWkL7iY8+zYHPILIGSJ+LHbAoPGjgiJK4xyTjcWZAa4+6GXLuZD3otb8nqIF3pm+VsPblD1Ip2RYBnXOEBUHiVZ60gGnavWE6B0tp3HFxSUglv8I5RLAmhs8Rr/5wmOW506uvgvaRXW6cw=
+  - secure: Ek5tMQMwVPCdw8LQHJTTmQ1gwKAmOCIS7yVZCTIeXDfr8ouDVRvs4819AK9WYKQnflDw8OVGsLClVGakx29PYPiW6W4JD58xK/OeX7rE9YIleXkH3belIO4nk7iVXc1J141iH2GKfze+Uth5KKg8TD82/bR3i0CU+2MEz46fWq9VBXY4jGWy2ueO/WfxpCui0t6j4jGE3AhNbnJ1SW9mHHuPuTGQ15qMQq/TUbElHDh9kQTpbdfMZDI3Xg2N7AdU6UsbK2pJS9M9iAJF7baMkxM1xr+FGhUUuYM9Js+DZ+Z5ixXDEse8sZMZcK7N0b/Zcv4+FLyYPRucbTQ8zhxeEhhIKmXHlnxm6/QZZdHdnnL1PpbOvh8Kcj6uYGqf4ewByw8CtYV3HxbeSnPa7BlGSzrdaLvu84u4n8F3KQaWJOL3rNjydOUhonxwVeH6do1JnCy6U26hooqNGr1gRJLCgwzgOGLwQArTwvdlWPMOQIeZdj/I1EqnSrRFqxMjVjcAsPpGbSHcdYzy/EcjzTl5ntZEgDF34YuW/ZDbtvYIr70GNxQiIDHWlkluCJzb9CvX253EXkCAlSgIT3BSBA2lqFeiJYeKNmm1wJqEAMYVlt0jW9N1OUxWlmFBkevKNCBm2EuWBxmwaHwfgzl5oUQgOWo7zpP11Zhame0oYhdZEUY=
