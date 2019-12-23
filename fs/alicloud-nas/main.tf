@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "alicloud" {
-  region = "cn-hongkong"
+  region  = "cn-hongkong"
   version = "~> 1.65"
 }
 
@@ -30,7 +30,7 @@ provider "random" {
 
 resource "random_id" "this" {
   byte_length = 4
-  prefix = "terraform-"
+  prefix      = "terraform-"
 }
 
 locals {
@@ -54,24 +54,23 @@ resource "alicloud_instance" "this" {
   vswitch_id                 = local.default_vswitch_id
   internet_max_bandwidth_out = 100
 
+  # connection {
+  #   type = "ssh"
+  #   user = "root"
+  #   host = alicloud_instance.this.public_ip
+  # }
 
-  connection {
-    type = "ssh"
-    user = "ec2-user"
-    host = alicloud_instance.this.public_ip
-  }
+  # provisioner "file" {
+  #   source      = "run.sh"
+  #   destination = "/tmp/run.sh"
+  # }
 
-  provisioner "file" {
-    source      = "test-nas-nfs4.sh"
-    destination = "/tmp/test-nas-nfs4.sh"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/test-nas-nfs4.sh",
-      "/tmp/test-nas-nfs4.sh ${alicloud_nas_file_system.this.id} || true", # expected to fail
-    ]
-  }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "chmod +x /tmp/run.sh",
+  #     "/tmp/test-nas-nfs4.sh ${alicloud_nas_file_system.this.id} || true", # expected to fail
+  #   ]
+  # }
 
   tags = {
     Name = local.label_id
@@ -85,13 +84,13 @@ data "alicloud_vswitches" "default" {
 }
 
 locals {
-  default_vpc_id = data.alicloud_vpcs.default.ids[0]
+  default_vpc_id     = data.alicloud_vpcs.default.ids[0]
   default_vswitch_id = data.alicloud_vswitches.default.ids[0]
 }
 
 resource "alicloud_security_group" "this" {
-  name        = local.label_id
-  vpc_id      = local.default_vpc_id
+  name   = local.label_id
+  vpc_id = local.default_vpc_id
 }
 
 provider "http" {
@@ -121,5 +120,5 @@ resource "alicloud_nas_file_system" "this" {
 }
 
 output "ssh_command" {
-   value = format("ssh ubuntu@%s", alicloud_instance.this.public_ip) 
+  value = format("ssh root@%s", alicloud_instance.this.public_ip)
 }

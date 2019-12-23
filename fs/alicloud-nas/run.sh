@@ -15,8 +15,8 @@ autoreconf -ifs
 make pjdfstest
 popd
 
-mount -t nfs -o vers=4,minorversion=0,noresvport $1-cgx88.cn-hongkong.nas.aliyuncs.com:/ /mnt
+# mount -t nfs -o vers=4,minorversion=0,noresvport $1-cgx88.cn-hongkong.nas.aliyuncs.com:/ /mnt
 
-pushd /mnt
-prove --recurse --failures /root/pjdfstest/tests | tee -a /root/test-alicloud-nas-nfs4.log
-popd
+# pushd /mnt
+# prove --recurse --failures /root/pjdfstest/tests | tee -a /root/test-alicloud-nas-nfs4.log
+# popd
